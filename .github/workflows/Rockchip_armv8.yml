@@ -73,10 +73,12 @@ jobs:
         $GITHUB_WORKSPACE/$PACKS
 
     - name: Modify configuration
+      working-directory: openwrt/
       run: |
-        cd openwrt && make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
+        ls -a
         [ -e $EXTERNAL_FILE ] && sudo cat $EXTERNAL_FILE >> .config
+        make defconfig
         cat .config
 
     - name: SSH connection to Actions
@@ -90,7 +92,6 @@ jobs:
       id: package
       run: |
         cd openwrt
-        make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;

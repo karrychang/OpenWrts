@@ -77,7 +77,6 @@ jobs:
       run: |
         make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
-        echo '$EXTERNAL_FILE' && cat $EXTERNAL_FILE
         [ -e $EXTERNAL_FILE ] && echo $EXTERNAL_FILE >> .config
 
     - name: SSH connection to Actions

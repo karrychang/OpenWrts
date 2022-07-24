@@ -77,7 +77,7 @@ jobs:
       run: |
         make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
-        [ -e $EXTERNAL_FILE ] && echo $EXTERNAL_FILE >> .config
+        echo ./$EXTERNAL_FILE >> .config
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0

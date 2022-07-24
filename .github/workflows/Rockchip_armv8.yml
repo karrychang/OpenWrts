@@ -70,13 +70,15 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $PACKS
         cd openwrt
-        make defconfig
         $GITHUB_WORKSPACE/$PACKS
 
     - name: Modify configuration
       run: |
-        sed -i '/CONFIG_DEFAULT_luci/'d openwrt/.config
-        cat openwrt/$EXTERNAL_FILE >> openwrt/.config
+        cd openwrt
+        make defconfig
+        sed -i '/CONFIG_DEFAULT_luci/'d .config
+        cat .config && ls -a
+        [ -e $EXTERNAL_FILE ] && cat $EXTERNAL_FILE >> .config
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0

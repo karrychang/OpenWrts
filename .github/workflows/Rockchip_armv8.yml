@@ -14,8 +14,8 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  EXTERNAL_FILE: configs/External.config
   CONFIG_FILE: configs/Rockchip.config
+  EXTERNAL_FILE: configs/External.config
   SYS_CONF_SH: configure.sh
   PACKS: package.sh
   UPLOAD_BIN_DIR: false
@@ -78,7 +78,7 @@ jobs:
         make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
         echo '$EXTERNAL_FILE' && cat $EXTERNAL_FILE
-        [ -e $EXTERNAL_FILE ] && cat $EXTERNAL_FILE >> .config
+        [ -e $EXTERNAL_FILE ] && echo $EXTERNAL_FILE >> .config
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0

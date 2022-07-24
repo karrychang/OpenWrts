@@ -74,11 +74,10 @@ jobs:
 
     - name: Modify configuration
       run: |
-        cd openwrt
-        make defconfig
+        cd openwrt && make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
-        [ -e $EXTERNAL_FILE ] && sudo cat $EXTERNAL_FILE >> .config <<'EOF'
-        echo .config
+        [ -e $EXTERNAL_FILE ] && sudo cat $EXTERNAL_FILE >> .config
+        cat .config
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0

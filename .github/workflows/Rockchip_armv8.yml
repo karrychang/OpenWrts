@@ -76,10 +76,10 @@ jobs:
     - name: Modify configuration
       working-directory: openwrt/
       run: |
+        make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
         ls -a
-        [ -e $EXTERNAL_FILE ] && sudo cat ../$EXTERNAL_FILE >> .config
-        make defconfig
+        cat /workdir/$EXTERNAL_FILE >> .config
         cat .config
 
     - name: SSH connection to Actions

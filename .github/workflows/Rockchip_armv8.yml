@@ -76,8 +76,8 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        sed -i '/CONFIG_DEFAULT_luci/'d .config
-        [ -e $EXTERNAL_FILE ] && cat $EXTERNAL_FILE >> .config
+        sed -i '/CONFIG_DEFAULT_luci/'d openwrt/.config
+        [ -e $EXTERNAL_FILE ] && cat $EXTERNAL_FILE >> openwrt/.config
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0

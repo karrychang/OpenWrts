@@ -70,11 +70,11 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $PACKS
         cd openwrt
+        make defconfig
         $GITHUB_WORKSPACE/$PACKS
 
     - name: Modify configuration
       run: |
-        make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d openwrt/.config
         cat openwrt/$EXTERNAL_FILE >> openwrt/.config
 

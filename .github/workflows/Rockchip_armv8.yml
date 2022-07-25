@@ -79,7 +79,7 @@ jobs:
         make defconfig
         sed -i '/CONFIG_DEFAULT_luci/'d .config
         ls -a
-        cat /workdir/$EXTERNAL_FILE >> .config
+        cat ../$EXTERNAL_FILE >> .config
         cat .config
 
     - name: SSH connection to Actions
